@@ -1,0 +1,15 @@
+{
+  "name": "pr-thankyou-action",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build src/action.js -o dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.0"
+  }
+}
