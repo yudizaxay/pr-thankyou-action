@@ -6,8 +6,8 @@ const github = require('@actions/github');
 async function run() {
   const GITHUB_TOKEN = core.getInput('GITHUB_TOKEN');
   const TENOR_TOKEN = core.getInput('TENOR_TOKEN') || process.env.TENOR_TOKEN;
-  const message = core.getInput('message') || 'Thank you!';
-  const searchTerm = core.getInput('searchTerm') || 'thank you';
+  const message = core.getInput('message');
+  const searchTerm = core.getInput('searchTerm');
   const octokit = github.getOctokit(GITHUB_TOKEN)
 
   if ( typeof TENOR_TOKEN !== 'string' ) {
@@ -41,7 +41,7 @@ async function run() {
   await octokit.rest.issues.createComment({
     ...context.repo,
     issue_number: pull_request.number,
-    body: `${message}\n\n<img src="${gifUrl}" alt="${searchTerm}" />`
+    body: `${message}\n\n<img src="${gifUrl}"/>`
   });
 }
 
