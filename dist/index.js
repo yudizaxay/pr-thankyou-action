@@ -10147,6 +10147,7 @@ async function run() {
   const TENOR_TOKEN = core.getInput('TENOR_TOKEN') || process.env.TENOR_TOKEN;
   const message = core.getInput('message') || 'Thank you!';
   const searchTerm = core.getInput('searchTerm') || 'thank you';
+  const octokit = github.getOctokit(GITHUB_TOKEN)
 
   if ( typeof TENOR_TOKEN !== 'string' ) {
     throw new Error('Invalid TENOR_TOKEN: did you forget to set it in your action config?');
@@ -10176,9 +10177,7 @@ async function run() {
 
   console.log(`Found pull request: ${pull_request.number}`);
 
-  const octokit = github.getOctokit(GITHUB_TOKEN)
-
-  await octokit.issues.createComment({
+  await octokit.rest.issues.createComment({
     ...context.repo,
     issue_number: pull_request.number,
     body: `${message}\n\n<img src="${gifUrl}" alt="${searchTerm}" />`
